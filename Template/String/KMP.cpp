@@ -18,8 +18,11 @@ void getnext()
             k=next[k];
         if(ptr[k]==ptr[i]) k++;
         next[i+1]=k;
-		//next表示的是匹配长度
     }
+    for(int i = 1;i<=n;i++){
+        cout<<next[i]<<" ";
+    }
+    cout<<endl;
 }
 int kmp(char *a,char *b)
 {
@@ -31,17 +34,18 @@ int kmp(char *a,char *b)
     {
         if(j==0||a[i]==b[j])
         {   i++;j++;       }
-        else j=next[j];//到前一个匹配点
+        else j=next[j+1];
     }
     if(j>=len2)
         return i-j;
-    else return 0;
+    else
+        return -1;
 }
 int main(){
 	while( scanf( "%s%s", str, ptr ) )
 	{
         int ans = kmp(str,ptr);
-        if(ans)
+        if(ans!=-1)
             printf( "%d\n", kmp( str,ptr ));
         else
             printf("404 Not find\n");

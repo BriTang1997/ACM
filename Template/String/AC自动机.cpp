@@ -53,7 +53,13 @@ void Insert(char *s)
 //获取fail指针，在插入结束之后使用
 void getfail(){
     queue<acnode*> q;
-    q.push(root);
+	for(int i = 0 ; i < 26 ; i ++ )
+	{
+		if(root->next[i]!=NULL){
+			root->next[i]->fail = root;
+			q.push(root->next[i]);
+		}
+	}
     while(!q.empty()){
         acnode* tem = q.front();
         q.pop();
